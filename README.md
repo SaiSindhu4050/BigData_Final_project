@@ -16,7 +16,7 @@ This project demonstrates the process of extracting, cleaning, and analyzing a l
 # Data Collection Process
 - API Data Fetching
 - Parameters
-Year Range: 2000 to 2010
+Year Range: 2000 to 2010.
 Pagination Limit: 500 movies per year
 Total Records: Approximately 104905 movies with  relevant details: id, title, release_date, vote_average, popularity, vote_count, genre_ids, and original_language.
 - Python Script for API Fetching: 
