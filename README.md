@@ -1,11 +1,11 @@
 # Final Project: Big Data Analysis and Visualization with Databricks
-Description
+# Description
 This project demonstrates the process of extracting, cleaning, and analyzing a large dataset using Databricks, a powerful distributed big data application. The dataset is a csv file consists of over 104,905 rows and 8 columns, obtained through TMDB(the movie dtabase) API. The project follows a structured approach to data processing, organized into three layers: Bronze (raw data ingestion), Silver (data cleaning), and Gold (aggregated datasets and visualizations using Matplotlib).
-The primary objectives
+# The primary objectives
 - To showcase the capabilities of Databricks for handling large datasets.
 - To implement best practices in data cleaning and analysis.
 - To create insightful visualizations with Matplotlib based on the cleaned and aggregated.
-Key Technologies
+# Key Technologies
 Databricks: For distributed data processing and analytics
 Apache Spark: For large-scale data processing
 DBFS (Databricks File System): For data storage
@@ -13,13 +13,13 @@ Parquet: For optimized data storage format
 TMDB API/: For data ingestion
 Python/PySpark: For data transformation and analysis
 Matplotlib/Seaborn: For data visualization.
-Data Collection Process
-API Data Fetching
-Parameters
+# Data Collection Process
+# API Data Fetching
+# Parameters
 Year Range: 2000 to 2010
 Pagination Limit: 500 movies per year
 Total Records: Approximately 104905 movies with  relevant details: id, title, release_date, vote_average, popularity, vote_count, genre_ids, and original_language.
-Python Script for API Fetching
+# Python Script for API Fetching
 import requests
 import csv
 import os
@@ -68,10 +68,10 @@ with open(csv_filename, 'a', newline='', encoding='utf-8') as csv_file:
             if response.status_code == 200:
                 for movie in response.json()['results']:
                     csv_writer.writerow([movie[field] for field in csv_headers])
-Data Processing Layers
+# Data Processing Layers
 Steps:
 Store Raw Data in DBFS
-Initialize Spark session
+# Initialize Spark session
 spark = SparkSession.builder.appName("LoadCSV").getOrCreate()
 Load the CSV file into a DataFrame named df
 df = (
@@ -81,10 +81,10 @@ spark.read.format("csv")
 .option("nullValue", "null")
 .load("dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv")
 )
-Bronze Layer
+# Bronze Layer
 Ingestion: Data fetched via API and stored in DBFS.
 Schema Validation: Infer schema and validate column types.
-Silver Layer
+# Silver Layer
 Standardization Process
 Clean column names.
 Remove duplicate rows.
@@ -92,20 +92,20 @@ Replacing the emptygenre column values to unknown genre
 Convert release_date to standardized formats.
 Replace null values in key columns.
 Performance analysis based on popularity.
-# Save as Parquet
-df.write.mode("overwrite").parquet("dbfs:/Users/your_user/silver_layer_data")
-Gold Layer
+Standard enconding
+df.write.mode("overwrite").parquet("dbfs:/Users/your_user/silver_layer_data") # Save as Parquet
+# Gold Layer
 Aggregations and Visualization
 Transform Silver Layer data for analysis.
 Generate metrics like top-rated genres or yearly trends.
 Save as a Delta table in Spark SQL.
 final_df = spark.read.parquet("dbfs:/Users/your_user/silver_layer_data")
 final_df.write.format("delta").mode("overwrite").saveAsTable("tmbdApi_movies_data")
-Storage Paths
+# Storage Paths
 Raw Data: dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv
 Silver Layer: dbfs:/Users/simhad76@students.rowan.edu/silver_layer_data
 Gold Layer: Table name: tmbdApi_movies_data
-Directory Structure
+# Directory Structure
 project/
 ├── data/
 │   └── tmdb_API_movies_data_2000_2010.csv
