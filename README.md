@@ -156,7 +156,7 @@ project/
 │   ├── 03_silver_layer.ipynb                  # Databricks notebook for cleaning and transforming data.
 │   └── 04_gold_layer.ipynb                    # Databricks notebook for creating aggregated datasets and visualizations.
 ├── scripts/
-│   ├── sourcecode_to_fetch_tmdbapi.ipynb      # Python notebook for fetching TMDB API data (if used externally).
+│   ├── API DATA.py      # Python notebook for fetching TMDB API data (if used externally).
 │   └── visualization.ipynb                   # Notebook for generating visualizations programmatically.
 ├── config/
 │   └── env.py                                 # Python file containing API keys and configuration parameters.
