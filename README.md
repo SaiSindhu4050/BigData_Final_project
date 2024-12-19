@@ -172,8 +172,7 @@ To run the notebook:
 
 1. Open Databricks Community Edition:
    - Go to
-
-     ```bash
+   ```bash
 [Databricks Community Edition](https://community.cloud.databricks.com/) and log in (or sign up if you haven't already).
 
    ```
