@@ -142,7 +142,9 @@ plt.plot().
 plt.text().
 sns.heatmap().
 # Directory Structure
-'''bash
+## Directory Structure
+
+```bash
 .
 project/
 ├── data/
@@ -158,7 +160,9 @@ project/
 ├── config/
 │   └── env.py                                 # Python file containing API keys and configuration parameters.
 ├── README.md                                  # Documentation explaining the project workflow.
-'''
+
+
+```
 
 
 
