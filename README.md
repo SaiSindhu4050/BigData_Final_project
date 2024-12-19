@@ -84,6 +84,7 @@ spark.read.format("csv")
 # Bronze Layer
 - Ingestion: Data fetched via API and stored in DBFS.
 - Schema Validation: Infer schema and validate column types.
+- display total no of ows and columns.
 # Silver Layer
 - Standardization Process
 - Clean column names.
@@ -141,7 +142,7 @@ plt.pie().
 plt.plot().
 plt.text().
 sns.heatmap().
-# Directory Structure
+
 ## Directory Structure
 
 ```bash
@@ -165,10 +166,30 @@ project/
 ```
 
 
+## Running the Notebook in Databricks Community Edition
 
+To run the notebook:
 
+1. Open Databricks Community Edition:
+   - Go to
 
+     ```bash
+[Databricks Community Edition](https://community.cloud.databricks.com/) and log in (or sign up if you haven't already).
 
+   ```
+   - Navigate to your Workspace or where you want to upload the notebook.
+
+2. Import the `.ipynb` Notebook:
+   - In Databricks, click on the "Workspace" section in the sidebar.
+   - Navigate to the folder where you want to import the notebook.
+   - Click the Import button at the top and select "Import File". Choose your `.ipynb` notebook file from your local machine.
+   - Once imported, the notebook will appear in your Databricks workspace.
+
+3. Open the Notebook:
+   - Find and click on the newly imported notebook in your workspace to open it.
+
+4. Execute the Notebook:
+   - Make sure to execute the cells in order to ensure dependencies between them are resolved (e.g., variables initialized in one cell are used in subsequent ones).
 
 
 
