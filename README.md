@@ -6,20 +6,20 @@ This project demonstrates the process of extracting, cleaning, and analyzing a l
 - To implement best practices in data cleaning and analysis.
 - To create insightful visualizations with Matplotlib based on the cleaned and aggregated.
 # Key Technologies
-Databricks: For distributed data processing and analytics
-Apache Spark: For large-scale data processing
-DBFS (Databricks File System): For data storage
-Parquet: For optimized data storage format
-TMDB API/: For data ingestion
-Python/PySpark: For data transformation and analysis
-Matplotlib/Seaborn: For data visualization.
+- Databricks: For distributed data processing and analytics
+- Apache Spark: For large-scale data processing
+- DBFS (Databricks File System): For data storage
+- Parquet: For optimized data storage format
+- TMDB API/: For data ingestion
+- Python/PySpark: For data transformation and analysis
+- Matplotlib/Seaborn: For data visualization.
 # Data Collection Process
-# API Data Fetching
-# Parameters
+- API Data Fetching
+Parameters
 Year Range: 2000 to 2010
 Pagination Limit: 500 movies per year
 Total Records: Approximately 104905 movies with  relevant details: id, title, release_date, vote_average, popularity, vote_count, genre_ids, and original_language.
-# Python Script for API Fetching
+- Python Script for API Fetching
 import requests
 import csv
 import os
@@ -69,9 +69,9 @@ with open(csv_filename, 'a', newline='', encoding='utf-8') as csv_file:
                 for movie in response.json()['results']:
                     csv_writer.writerow([movie[field] for field in csv_headers])
 # Data Processing Layers
-Steps:
-Store Raw Data in DBFS
-# Initialize Spark session
+- Steps:
+Intially upload the csv file in DBFS. Then copy the path of the csv file in dbfs.
+#- Initialize Spark session
 spark = SparkSession.builder.appName("LoadCSV").getOrCreate()
 Load the CSV file into a DataFrame named df
 df = (
@@ -105,72 +105,13 @@ final_df.write.format("delta").mode("overwrite").saveAsTable("tmbdApi_movies_dat
 Raw Data: dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv
 Silver Layer: dbfs:/Users/simhad76@students.rowan.edu/silver_layer_data
 Gold Layer: Table name: tmbdApi_movies_data
-# Directory Structure
-project/
-├── data/
-│   └── tmdb_API_movies_data_2000_2010.csv
-├── notebooks/
-│   ├── 01_data_collection.ipynb
-│   ├── 02_bronze_layer.ipynb
-│   ├── 03_silver_layer.ipynb
-│   └── 04_gold_layer.ipynb
-├── scripts/
-│   ├── sourcecode_to_fetch_tmdbapi.ipynb
-│   └── visualization.ipynb
-├── config/
-│   └── env.py
-├── README.md
-
-
-
-
-
-
-
-
-
-
-
-Data Collection Strategy
-Year Range: 2000 to 2010
-Pagination Limit: 500 movies per year
-Total Records: Approximately 104905 movies with  relevant details: id, title, release_date, vote_average, popularity, vote_count, genre_ids, and original_language.
-Data Format: CSV
-Data Processing Layers
-Steps:
-Store Raw Data in DBFS
-Initialize Spark session
-spark = SparkSession.builder.appName("LoadCSV").getOrCreate()
-Load the CSV file into a DataFrame named df
-df = (
-spark.read.format("csv")
-.option("header", True)
-.option("inferSchema", True)
-.option("nullValue", "null")
-.load("dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv")
-)
-Bronze Layer (Raw Data)
-API data fetching with pagination
-CSV storage in DBFS
-Raw data validation
-Schema inference and validation
-Basic data quality checks and Total number of rows and columns.
-Data Cleaning
-In the Silver layer, the dataset undergoes cleaning to ensure accuracy and consistency. This includes:
-The `standardize_dataframe` function performs several operations:
-   - Cleans column names.
-   - Drops duplicate rows.
-   - Trims string data.
-   - Replaces empty values in specific columns.
-   - Converts release dates to a standardized date format.
-   - Analyzes performance based on popularity metrics.
-Python Libraries
+# Python Libraries
 pandas
 matplotlib.pyplot 
 seaborn
 re
 datetime
-PySpark Functions
+# PySpark Functions
 SparkSession
 SparkSession.builder.appName() 
 DataFrame and SQL Functions
@@ -188,19 +129,19 @@ split()
 size()
 substring()
 current_timestamp()
-Python Data Manipulation
+# Python Data Manipulation
 to_datetime()
 value_counts()
 groupby()
 unstack()
-Matplotlib and Seaborn
+# Matplotlib and Seaborn
 plt.figure()
 plt.barh()
 plt.pie()
 plt.plot()
 plt.text()
 sns.heatmap()
-Directory Structure
+# Directory Structure
 project/
 ├── data/
 │   └── tmdb_API_movies_data_2000_2010.csv      # Dataset containing movie data from TMDB API.
@@ -215,4 +156,14 @@ project/
 ├── config/
 │   └── env.py                                 # Python file containing API keys and configuration parameters.
 ├── README.md                                  # Documentation explaining the project workflow.
+
+
+
+
+
+
+
+
+
+
 
