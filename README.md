@@ -15,11 +15,11 @@ This project demonstrates the process of extracting, cleaning, and analyzing a l
 - Matplotlib/Seaborn: For data visualization.
 # Data Collection Process
 - API Data Fetching
-Parameters
+- Parameters
 Year Range: 2000 to 2010
 Pagination Limit: 500 movies per year
 Total Records: Approximately 104905 movies with  relevant details: id, title, release_date, vote_average, popularity, vote_count, genre_ids, and original_language.
-- Python Script for API Fetching
+- Python Script for API Fetching: 
 import requests
 import csv
 import os
@@ -71,9 +71,9 @@ with open(csv_filename, 'a', newline='', encoding='utf-8') as csv_file:
 # Data Processing Layers
 - Steps:
 Intially upload the csv file in DBFS. Then copy the path of the csv file in dbfs.
-#- Initialize Spark session
+- Initialize Spark session
 spark = SparkSession.builder.appName("LoadCSV").getOrCreate()
-Load the CSV file into a DataFrame named df
+- Load the CSV file into a DataFrame named df
 df = (
 spark.read.format("csv")
 .option("header", True)
@@ -82,66 +82,68 @@ spark.read.format("csv")
 .load("dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv")
 )
 # Bronze Layer
-Ingestion: Data fetched via API and stored in DBFS.
-Schema Validation: Infer schema and validate column types.
+- Ingestion: Data fetched via API and stored in DBFS.
+- Schema Validation: Infer schema and validate column types.
 # Silver Layer
-Standardization Process
-Clean column names.
-Remove duplicate rows.
-Replacing the emptygenre column values to unknown genre
-Convert release_date to standardized formats.
-Replace null values in key columns.
-Performance analysis based on popularity.
-Standard enconding
-df.write.mode("overwrite").parquet("dbfs:/Users/your_user/silver_layer_data") # Save as Parquet
+- Standardization Process
+- Clean column names.
+- Remove duplicate rows.
+- Replacing the emptygenre column values to unknown genre
+- Convert release_date to standardized formats.
+- Replace null values in key columns.
+- Performance analysis based on popularity.
+- Standard enconding
+- Save as Parquet file in dbfs.
 # Gold Layer
-Aggregations and Visualization
-Transform Silver Layer data for analysis.
-Generate metrics like top-rated genres or yearly trends.
-Save as a Delta table in Spark SQL.
-final_df = spark.read.parquet("dbfs:/Users/your_user/silver_layer_data")
-final_df.write.format("delta").mode("overwrite").saveAsTable("tmbdApi_movies_data")
+- Intially read the file from saves parquet file in siver layer . final_df = spark.read.parquet("dbfs:/Users/your_user/silver_layer_data")
+- Aggregations and Visualization
+- Transform Silver Layer data for analysis.
+- Generate metrics like top-rated genres or yearly trends.
+- Save as a Delta table in Spark SQL.
+- final_df.write.format("delta").mode("overwrite").saveAsTable("tmbdApi_movies_data")
 # Storage Paths
-Raw Data: dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv
-Silver Layer: dbfs:/Users/simhad76@students.rowan.edu/silver_layer_data
-Gold Layer: Table name: tmbdApi_movies_data
+- Raw Data: dbfs:/FileStore/tmdb_API__movies_data_2000_2010.csv
+- Silver Layer: dbfs:/Users/simhad76@students.rowan.edu/silver_layer_data
+- Gold Layer: Table name: tmbdApi_movies_data
 # Python Libraries
-pandas
-matplotlib.pyplot 
-seaborn
-re
-datetime
+pandas.
+matplotlib.pyplot .
+seaborn.
+re.
+datetime.
 # PySpark Functions
-SparkSession
-SparkSession.builder.appName() 
-DataFrame and SQL Functions
-read.format("delta").table() 
-col()
-count()
-when()
-lit()
-isnan()
-coalesce()
-trim()
-lower()
-initcap()
-split()
-size()
-substring()
-current_timestamp()
+SparkSession.
+SparkSession.builder.appName(). 
+DataFrame and SQL Functions.
+read.format("delta").table().
+col().
+count().
+when().
+lit().
+isnan().
+coalesce().
+trim().
+lower().
+initcap().
+split().
+size().
+substring().
+current_timestamp().
 # Python Data Manipulation
-to_datetime()
-value_counts()
-groupby()
-unstack()
+to_datetime().
+value_counts().
+groupby().
+unstack().
 # Matplotlib and Seaborn
-plt.figure()
-plt.barh()
-plt.pie()
-plt.plot()
-plt.text()
-sns.heatmap()
+plt.figure().
+plt.barh(.)
+plt.pie().
+plt.plot().
+plt.text().
+sns.heatmap().
 # Directory Structure
+'''bash
+.
 project/
 ├── data/
 │   └── tmdb_API_movies_data_2000_2010.csv      # Dataset containing movie data from TMDB API.
@@ -156,7 +158,7 @@ project/
 ├── config/
 │   └── env.py                                 # Python file containing API keys and configuration parameters.
 ├── README.md                                  # Documentation explaining the project workflow.
-
+'''
 
 
 
