@@ -10,7 +10,7 @@ This project demonstrates the process of extracting, cleaning, and analyzing a l
 - Apache Spark: For large-scale data processing
 - DBFS (Databricks File System): For data storage
 - Parquet: For optimized data storage format
-- TMDB API/: For data ingestion
+- TMDB API: For data ingestion
 - Python/PySpark: For data transformation and analysis
 - Matplotlib/Seaborn: For data visualization.
 # Data Collection Process
